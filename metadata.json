@@ -1,0 +1,6 @@
+{
+  "name": "Wonders Of God Church",
+  "description": "Modern Apple-style digital experience for Wonders Of God Church (WOGC), Lekki.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
