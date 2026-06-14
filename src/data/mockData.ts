@@ -40,7 +40,7 @@ export const MOCK_EVENTS: Event[] = [
     date: 'June 28, 2026 • 6:00 PM',
     venue: 'Osapa London, Lekki',
     description: 'An extraordinary night of worship, miracles, and the tangible presence of God.',
-    image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&q=80&w=1200',
     category: 'Special',
     registrationLink: '#'
   },
@@ -75,11 +75,11 @@ export const MOCK_TESTIMONIES: Testimony[] = [
 
 export const MOCK_MINISTRIES: Ministry[] = [
   { id: '1', name: 'Youth', slug: 'youth', description: 'Empowering the next generation to lead with faith and excellence.', image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=800' },
-  { id: '2', name: 'Children', slug: 'children', description: 'Building a solid foundation for our little ones in the word of God.', image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800' },
+  { id: '2', name: 'Children', slug: 'children', description: 'Building a solid foundation for our little ones in the word of God.', image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&q=80&w=800' },
   { id: '3', name: 'Men', slug: 'men', description: 'Iron sharpening iron. Men becoming the leaders God called them to be.', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800' },
   { id: '4', name: 'Women', slug: 'women', description: 'Virtuous women growing in grace and community.', image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800' },
-  { id: '5', name: 'Prayer', slug: 'prayer', description: 'The engine room of the church. Interceding for lives and our nation.', image: 'https://images.unsplash.com/photo-1544427928-14292fb542d1?auto=format&fit=crop&q=80&w=800' },
-  { id: '6', name: 'Outreach', slug: 'outreach', description: 'Reaching out with the love of Christ to the Lekki community and beyond.', image: 'https://images.unsplash.com/photo-1469571483333-2199b3174291?auto=format&fit=crop&q=80&w=800' }
+  { id: '5', name: 'Prayer', slug: 'prayer', description: 'The engine room of the church. Interceding for lives and our nation.', image: 'https://images.unsplash.com/photo-1445077181694-29c456fa7364?auto=format&fit=crop&q=80&w=800' },
+  { id: '6', name: 'Outreach', slug: 'outreach', description: 'Reaching out with the love of Christ to the Lekki community and beyond.', image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&q=80&w=800' }
 ];
 
 export const MOCK_LEADERSHIP: Leadership[] = [

@@ -19,10 +19,10 @@ export const Home = () => {
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&q=80&w=2000" 
-            className="w-full h-full object-cover opacity-40"
+            className="w-full h-full object-cover opacity-50"
             alt="Church Worship"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/60 via-transparent to-brand-navy" />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/70 via-brand-navy/30 to-brand-navy" />
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center text-white">
@@ -183,11 +183,12 @@ export const Home = () => {
           />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {MOCK_MINISTRIES.map((m) => (
-              <Link key={m.id} to={`/ministries/${m.slug}`} className="relative h-64 rounded-apple overflow-hidden group">
-                <img src={m.image} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60" alt={m.name} />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-6 left-6">
-                  <h4 className="font-bold text-lg">{m.name}</h4>
+              <Link key={m.id} to={`/ministries/${m.slug}`} className="relative h-80 rounded-apple overflow-hidden group">
+                <img src={m.image} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90" alt={m.name} />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/10 to-transparent" />
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h4 className="font-black text-2xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] uppercase tracking-tight">{m.name}</h4>
+                  <div className="w-10 h-1.5 bg-brand-gold mt-3 group-hover:w-full transition-all duration-500 shadow-lg" />
                 </div>
               </Link>
             ))}
