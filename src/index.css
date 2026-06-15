@@ -25,7 +25,11 @@
 
 @layer components {
   .glass-nav {
-    @apply bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-sm transition-all duration-300;
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] rounded-2xl;
+  }
+
+  .nav-link-apple {
+    @apply relative px-3 py-1.5 rounded-lg transition-all duration-300 hover:bg-black/5 active:scale-95;
   }
 
   .apple-card {
@@ -46,5 +50,22 @@
 
   .section-padding {
     @apply py-20 lg:py-32 px-6;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .perspective-1200 {
+    perspective: 1200px;
+  }
+
+  .section-divider {
+    @apply w-full h-px;
+    background: linear-gradient(to right, transparent, rgba(212, 175, 55, 0.3), transparent);
   }
 }

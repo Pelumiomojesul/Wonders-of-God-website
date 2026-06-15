@@ -44,21 +44,25 @@ export const Navbar = () => {
   return (
     <>
       <nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled || isOpen ? 'glass-nav py-4' : 'bg-transparent py-6'
+        className={`fixed top-0 left-0 right-0 z-[1000] flex justify-center transition-all duration-500 pt-4 px-4 ${
+          scrolled || isOpen ? '' : 'pointer-events-none'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2 group z-50">
-            <img src="/src/assets/logo.jpg" alt="WOGC Logo" className="w-10 h-10 md:w-12 md:h-12 object-cover rounded-full transform group-hover:rotate-12 transition-transform shadow-md" referrerPolicy="no-referrer" />
+        <div className={`flex items-center justify-between w-full max-w-7xl px-6 transition-all duration-500 pointer-events-auto ${
+          scrolled || isOpen 
+            ? 'glass-nav py-3' 
+            : 'bg-transparent py-6 border-transparent shadow-none'
+        }`}>
+          <Link to="/" className="flex items-center gap-2 group shrink-0">
+            <img src="/src/assets/logo.jpg" alt="WOGC Logo" className="w-9 h-9 md:w-10 md:h-10 object-cover rounded-full transform group-hover:rotate-12 transition-transform shadow-md" referrerPolicy="no-referrer" />
             <div className="flex flex-col">
-              <span className={`font-display font-bold text-sm md:text-lg leading-tight transition-colors duration-300 ${(scrolled || isOpen) ? 'text-brand-navy' : 'text-white'}`}>Wonders Of God Church</span>
-              <span className={`text-[10px] tracking-widest uppercase transition-opacity duration-300 ${(scrolled || isOpen) ? 'text-brand-navy/60' : 'text-white/70'}`}>Lekki</span>
+              <span className={`font-display font-bold text-sm md:text-base leading-tight transition-colors duration-300 ${(scrolled || isOpen) ? 'text-brand-navy' : 'text-white'}`}>Wonders Of God</span>
+              <span className={`text-[9px] tracking-widest uppercase transition-opacity duration-300 ${(scrolled || isOpen) ? 'text-brand-navy/60' : 'text-white/70'}`}>Lekki</span>
             </div>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-2 lg:gap-4">
             {navItems.map((item) => (
               item.name === 'Sermons' ? (
                 <div 
@@ -70,14 +74,14 @@ export const Navbar = () => {
                   <NavLink
                     to={item.path}
                     className={({ isActive }) => 
-                      `flex items-center gap-1 text-sm font-bold transition-colors hover:text-brand-blue ${
+                      `nav-link-apple flex items-center gap-1 text-xs font-bold transition-colors ${
                         isActive 
-                          ? 'text-brand-blue' 
-                          : scrolled ? 'text-brand-navy' : 'text-white/90'
+                          ? 'text-brand-blue bg-brand-blue/5' 
+                          : scrolled || isOpen ? 'text-brand-navy hover:text-brand-blue' : 'text-white/90 hover:text-white hover:bg-white/10'
                       }`
                     }
                   >
-                    {item.name} <ChevronDown size={14} className={`transition-transform duration-300 ${showSermonMenu ? 'rotate-180' : ''}`} />
+                    {item.name} <ChevronDown size={12} className={`transition-transform duration-300 ${showSermonMenu ? 'rotate-180' : ''}`} />
                   </NavLink>
 
                   <AnimatePresence>
@@ -129,10 +133,10 @@ export const Navbar = () => {
                   key={item.path}
                   to={item.path}
                   className={({ isActive }) => 
-                    `text-sm font-bold transition-colors hover:text-brand-blue ${
+                    `nav-link-apple text-xs font-bold transition-colors ${
                       isActive 
-                        ? 'text-brand-blue' 
-                        : scrolled ? 'text-brand-navy' : 'text-white/90'
+                        ? 'text-brand-blue bg-brand-blue/5' 
+                        : scrolled || isOpen ? 'text-brand-navy hover:text-brand-blue' : 'text-white/90 hover:text-white hover:bg-white/10'
                     }`
                   }
                 >
@@ -143,16 +147,16 @@ export const Navbar = () => {
 
             {/* Watch Online Dropdown */}
             <div 
-              className="relative"
+              className="relative h-full flex items-center"
               onMouseEnter={() => setShowWatchMenu(true)}
               onMouseLeave={() => setShowWatchMenu(false)}
             >
               <button 
-                className={`flex items-center gap-1 text-sm font-bold transition-colors hover:text-brand-blue ${
-                  scrolled ? 'text-brand-navy' : 'text-white/90'
+                className={`nav-link-apple flex items-center gap-1 text-xs font-bold transition-colors ${
+                  scrolled || isOpen ? 'text-brand-navy hover:text-brand-blue' : 'text-white/90 hover:text-white hover:bg-white/10'
                 }`}
               >
-                Watch Online <ChevronDown size={14} className={`transition-transform duration-300 ${showWatchMenu ? 'rotate-180' : ''}`} />
+                Watch <ChevronDown size={12} className={`transition-transform duration-300 ${showWatchMenu ? 'rotate-180' : ''}`} />
               </button>
               
               <AnimatePresence>
@@ -161,33 +165,33 @@ export const Navbar = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden py-2"
+                    className="absolute top-full right-0 mt-2 w-48 bg-white/90 backdrop-blur-xl rounded-xl shadow-2xl border border-white/20 overflow-hidden py-2"
                   >
                     <a 
                       href="https://www.youtube.com/@WOGCMedia" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-brand-bg transition-colors"
+                      className="flex items-center gap-3 px-4 py-3 text-xs font-bold text-gray-700 hover:bg-brand-bg transition-colors"
                     >
-                      <Youtube size={18} className="text-red-600" />
+                      <Youtube size={16} className="text-red-600" />
                       <span>YouTube Live</span>
                     </a>
                     {user && (
                       <Link 
                         to="/dashboard/watch"
-                        className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-brand-bg transition-colors border-t border-gray-50"
+                        className="flex items-center gap-3 px-4 py-3 text-xs font-bold text-gray-700 hover:bg-brand-bg transition-colors border-t border-gray-50"
                       >
-                        <PlayCircle size={18} className="text-brand-blue" />
-                        <span className="font-bold">Member Portal</span>
+                        <PlayCircle size={16} className="text-brand-blue" />
+                        <span>Member Portal</span>
                       </Link>
                     )}
                     <a 
                       href="https://www.facebook.com/wogclekki/" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-brand-bg transition-colors border-t border-gray-50"
+                      className="flex items-center gap-3 px-4 py-3 text-xs font-bold text-gray-700 hover:bg-brand-bg transition-colors border-t border-gray-50"
                     >
-                      <Facebook size={18} className="text-blue-600" />
+                      <Facebook size={16} className="text-blue-600" />
                       <span>Facebook Live</span>
                     </a>
                   </motion.div>
@@ -197,8 +201,8 @@ export const Navbar = () => {
 
             <Link 
               to={user ? "/dashboard" : "/login"}
-              className={`text-sm font-bold transition-colors hover:text-brand-blue ${
-                scrolled ? 'text-brand-navy' : 'text-white/90'
+              className={`nav-link-apple text-xs font-bold transition-colors ${
+                scrolled || isOpen ? 'text-brand-navy hover:text-brand-blue' : 'text-white/90 hover:text-white hover:bg-white/10'
               }`}
             >
               {user ? 'Dashboard' : 'Login'}
@@ -206,25 +210,25 @@ export const Navbar = () => {
 
             <Link 
               to="/visit" 
-              className="px-6 py-2.5 bg-brand-blue text-white rounded-full text-sm font-medium hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-500/20"
+              className="px-5 py-2 bg-brand-blue text-white rounded-full text-xs font-bold hover:bg-blue-700 transition-all active:scale-95 shadow-lg shadow-blue-500/20 whitespace-nowrap"
             >
-              Plan Your Visit
+              Visit Us
             </Link>
           </div>
 
           {/* Mobile Toggle */}
           <button 
-            className={`md:hidden p-2 rounded-xl transition-all duration-300 z-[60] ${
+            className={`md:hidden p-2 rounded-xl transition-all duration-300 z-[1010] ${
               isOpen 
                 ? 'bg-brand-bg text-brand-navy shadow-inner' 
                 : scrolled 
-                  ? 'bg-white/50 text-brand-navy' 
-                  : 'bg-white/10 text-white backdrop-blur-sm'
+                  ? 'bg-brand-navy/5 text-brand-navy' 
+                  : 'bg-white/10 text-white backdrop-blur-md'
             }`}
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </nav>
@@ -239,7 +243,7 @@ export const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-brand-navy/40 backdrop-blur-sm z-50 md:hidden"
+              className="fixed inset-0 bg-brand-navy/40 backdrop-blur-sm z-[1001] md:hidden"
             />
 
             {/* Side Drawer */}
@@ -248,7 +252,7 @@ export const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed inset-y-0 right-0 w-[85%] max-w-md bg-white z-[55] shadow-2xl md:hidden overflow-y-auto flex flex-col"
+              className="fixed inset-y-0 right-0 w-[85%] max-w-md bg-white z-[1002] shadow-2xl md:hidden overflow-y-auto flex flex-col"
             >
               <div className="flex flex-col p-8 pt-24 gap-2">
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-4 px-2">Navigation</span>

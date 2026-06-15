@@ -4,6 +4,8 @@ import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { MOCK_SERMONS, MOCK_EVENTS, MOCK_TESTIMONIES, MOCK_MINISTRIES } from '../data/mockData';
 import { DailyGrace } from '../components/DailyGrace';
+import { MinistryCarousel } from '../components/MinistryCarousel';
+import { AnimatedTestimonials } from '../components/AnimatedTestimonials';
 
 const SectionHeader = ({ title, subtitle, centered = false }: { title: string; subtitle?: string; centered?: boolean }) => (
   <div className={`mb-16 ${centered ? 'text-center' : ''}`}>
@@ -11,6 +13,8 @@ const SectionHeader = ({ title, subtitle, centered = false }: { title: string; s
     {subtitle && <p className="text-gray-500 text-lg max-w-2xl mx-auto">{subtitle}</p>}
   </div>
 );
+
+const Divider = () => <div className="section-divider" />;
 
 export const Home = () => {
   return (
@@ -71,6 +75,8 @@ export const Home = () => {
         </motion.div>
       </section>
 
+      <Divider />
+
       {/* SECTION 2 — WELCOME */}
       <section className="section-padding bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -104,6 +110,8 @@ export const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      <Divider />
 
       {/* SECTION 3 — SERVICE TIMES */}
       <section className="section-padding bg-brand-bg">
@@ -142,6 +150,8 @@ export const Home = () => {
           </div>
         </div>
       </section>
+
+      <Divider />
 
       {/* SECTION 4 — FEATURED SERMONS */}
       <section className="section-padding bg-white overflow-hidden">
@@ -185,8 +195,12 @@ export const Home = () => {
         </div>
       </section>
 
+      <Divider />
+
       {/* SECTION: DAILY GRACE */}
       <DailyGrace />
+
+      <Divider />
 
       {/* SECTION 5 — MINISTRIES */}
       <section id="ministries" className="section-padding bg-brand-navy text-white">
@@ -200,28 +214,13 @@ export const Home = () => {
               View All Ministries
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
-            {MOCK_MINISTRIES.map((m, i) => (
-              <motion.div
-                key={m.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-              >
-                <Link to={`/ministries#${m.slug}`} className="relative h-80 rounded-apple overflow-hidden group block">
-                  <img src={m.image} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90" alt={m.name} />
-                  <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/10 to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <h4 className="font-extrabold text-lg md:text-xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-tight">{m.name}</h4>
-                    <div className="w-10 h-1.5 bg-brand-gold mt-3 group-hover:w-full transition-all duration-500 shadow-lg" />
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+          <div className="mt-10 overflow-visible">
+            <MinistryCarousel ministries={MOCK_MINISTRIES} />
           </div>
         </div>
       </section>
+
+      <Divider />
 
       {/* SECTION 6 — UPCOMING EVENTS */}
       <section className="section-padding bg-white">
@@ -265,38 +264,17 @@ export const Home = () => {
         </div>
       </section>
 
+      <Divider />
+
       {/* SECTION 7 — TESTIMONIES */}
-      <section className="section-padding bg-brand-bg">
+      <section className="section-padding bg-brand-bg md:py-40">
         <div className="max-w-7xl mx-auto">
           <SectionHeader title="Changed Lives" subtitle="Real stories of God's power and transformation in our community." centered />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {MOCK_TESTIMONIES.map((testimony, i) => (
-              <motion.div
-                key={testimony.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="apple-card p-10 relative flex flex-col h-full"
-              >
-                <Quote className="absolute top-6 left-6 text-brand-blue opacity-10" size={40} />
-                <div className="relative z-10 flex flex-col h-full">
-                  <p className="text-lg font-medium text-gray-800 leading-relaxed mb-8 italic flex-grow">
-                    "{testimony.story}"
-                  </p>
-                  <div className="flex items-center gap-4 mt-auto pt-6 border-t border-gray-100">
-                    <img src={testimony.photo} className="w-12 h-12 rounded-full object-cover ring-2 ring-white" alt={testimony.name} />
-                    <div className="text-left">
-                      <h5 className="font-bold text-base text-brand-navy">{testimony.name}</h5>
-                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{testimony.date}</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <AnimatedTestimonials testimonials={MOCK_TESTIMONIES} autoplay={true} />
         </div>
       </section>
+
+      <Divider />
 
       {/* SECTION 8 — GIVING */}
       <section className="section-padding bg-brand-navy relative overflow-hidden">
