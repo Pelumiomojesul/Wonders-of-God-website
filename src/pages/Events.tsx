@@ -1,11 +1,38 @@
-import React from 'react';
-import { motion } from 'motion/react';
-import { Calendar, MapPin, Clock, ArrowRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Calendar, MapPin, Clock, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { MOCK_EVENTS } from '../data/mockData';
 
 export const Events = () => {
+  const [isRegistered, setIsRegistered] = useState(false);
+
+  const handleRegister = () => {
+    setIsRegistered(true);
+    setTimeout(() => setIsRegistered(false), 5000);
+  };
+
   return (
     <div className="pt-24 min-h-screen bg-white">
+      {/* Registration Success Toast */}
+      <AnimatePresence>
+        {isRegistered && (
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 bg-white shadow-2xl rounded-2xl px-8 py-6 border border-brand-blue/20 flex items-center gap-4"
+          >
+            <div className="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+              <CheckCircle2 size={24} />
+            </div>
+            <div>
+              <p className="font-bold text-brand-navy">Successfully Registered!</p>
+              <p className="text-sm text-gray-500">We've sent the details to your email.</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Featured Header */}
       <section className="bg-brand-navy py-32 md:py-40 relative flex items-center justify-center text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -18,7 +45,7 @@ export const Events = () => {
         </div>
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-white text-center">
             <span className="text-brand-blue font-bold tracking-widest uppercase text-sm mb-6 block">Don't Miss Out</span>
-            <h1 className="text-5xl md:text-7xl font-black mb-8 leading-tight tracking-tighter">Upcoming at WOGC</h1>
+            <h1 className="text-5xl md:text-7xl font-black mb-8 leading-tight tracking-tighter text-white">Upcoming at WOGC</h1>
             <p className="text-xl text-white/60 max-w-2xl mx-auto">Discover moments of worship, learning, and gathering as a family of faith.</p>
         </div>
       </section>
@@ -43,7 +70,12 @@ export const Events = () => {
                       <span>{MOCK_EVENTS[0].venue}</span>
                    </div>
                 </div>
-                <button className="cta-button cta-primary text-xl py-5 shadow-2xl shadow-blue-500/40">Register For Free</button>
+                <button 
+                  onClick={handleRegister}
+                  className="cta-button cta-primary text-xl py-5 shadow-2xl shadow-blue-500/40"
+                >
+                  Register For Free
+                </button>
              </div>
              <div className="relative h-[400px] lg:h-auto order-first lg:order-last">
                 <img src={MOCK_EVENTS[0].image} className="w-full h-full object-cover" alt="Featured Event" />
@@ -83,7 +115,10 @@ export const Events = () => {
                      <div className="flex items-center gap-2"><Calendar size={14} /> {event.date}</div>
                      <div className="flex items-center gap-2"><MapPin size={14} /> {event.venue}</div>
                   </div>
-                  <button className="w-full py-4 border-2 border-brand-navy rounded-full font-bold hover:bg-brand-navy hover:text-white transition-all active:scale-95">
+                  <button 
+                    onClick={handleRegister}
+                    className="w-full py-4 border-2 border-brand-navy rounded-full font-bold hover:bg-brand-navy hover:text-white transition-all active:scale-95"
+                  >
                     View Details
                   </button>
                 </div>

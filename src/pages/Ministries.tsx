@@ -4,15 +4,13 @@ import { ArrowRight, Users, Heart, BookOpen, Music, Handshake, Globe } from 'luc
 import { MOCK_MINISTRIES } from '../data/mockData';
 
 const getIcon = (slug: string) => {
-  switch (slug) {
-    case 'youth': return Users;
-    case 'children': return Heart;
-    case 'men': return BookOpen;
-    case 'women': return Music;
-    case 'prayer': return Handshake;
-    case 'outreach': return Globe;
-    default: return Users;
-  }
+  if (slug.includes('youth')) return Users;
+  if (slug.includes('children')) return Heart;
+  if (slug.includes('men')) return BookOpen;
+  if (slug.includes('women')) return Music;
+  if (slug.includes('prayer')) return Handshake;
+  if (slug.includes('outreach')) return Globe;
+  return Users;
 };
 
 export const Ministries = () => {
@@ -48,6 +46,7 @@ export const Ministries = () => {
               return (
                 <motion.div 
                   key={m.id}
+                  id={m.slug}
                   whileInView={{ opacity: 1, y: 0 }}
                   initial={{ opacity: 0, y: 30 }}
                   transition={{ delay: i * 0.1 }}
@@ -62,7 +61,7 @@ export const Ministries = () => {
                       <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-brand-blue shadow-lg shadow-blue-500/10 mb-6 group-hover:scale-110 transition-transform">
                          <Icon size={24} />
                       </div>
-                      <h3 className="text-3xl font-black mb-4">{m.name} Ministry</h3>
+                      <h3 className="text-3xl font-black mb-4">{m.name}</h3>
                       <p className="text-gray-500 mb-8 font-medium leading-relaxed">
                         {m.description} Join us as we build a vibrant foundation in the word of God and support each other.
                       </p>

@@ -2,10 +2,22 @@ import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { Play, Search, Filter, Calendar, User } from 'lucide-react';
 import { MOCK_SERMONS } from '../data/mockData';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export const Sermons = () => {
   const [activeTab, setActiveTab] = useState('All');
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const filters = ['All', 'Latest', 'Wonders Series', 'Prayer Ignite', 'Study'];
+
+  const handleWatch = () => {
+    if (user) {
+      navigate('/dashboard/watch');
+    } else {
+      navigate('/login');
+    }
+  };
 
   return (
     <div className="pt-24 min-h-screen bg-brand-bg">
@@ -32,7 +44,7 @@ export const Sermons = () => {
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="apple-card overflow-hidden grid grid-cols-1 lg:grid-cols-2 bg-white">
-            <div className="relative aspect-video lg:aspect-auto h-full">
+            <div className="relative aspect-video lg:aspect-auto h-full group cursor-pointer" onClick={handleWatch}>
               <img src={MOCK_SERMONS[0].thumbnail} className="w-full h-full object-cover" alt="Featured" />
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                 <button className="w-20 h-20 bg-brand-blue text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-2xl">
@@ -81,11 +93,20 @@ export const Sermons = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {MOCK_SERMONS.map((sermon) => (
+            {MOCK_SERMONS.filter(s => 
+              activeTab === 'All' || 
+              (activeTab === 'Latest' && s.id === '1') ||
+              (activeTab === 'Wonders Series' && s.series === 'Wonders Series') ||
+              (activeTab === 'Prayer Ignite' && s.series === 'Prayer Ignite') ||
+              (activeTab === 'Study' && s.series === 'New Beginnings')
+            ).map((sermon) => (
               <motion.div 
                 key={sermon.id}
                 layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
                 className="group cursor-pointer"
+                onClick={handleWatch}
               >
                 <div className="relative aspect-video rounded-apple overflow-hidden mb-6 shadow-xl shadow-black/5">
                   <img src={sermon.thumbnail} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={sermon.title} />
@@ -99,25 +120,6 @@ export const Sermons = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-gray-400 text-sm font-medium">{sermon.speaker}</span>
                   <span className="text-gray-300 text-xs font-bold uppercase tracking-widest">{sermon.series}</span>
-                </div>
-              </motion.div>
-            ))}
-            {/* Repeat for visual density */}
-            {MOCK_SERMONS.map((sermon) => (
-              <motion.div 
-                key={`${sermon.id}-dup`}
-                layout
-                className="group cursor-pointer"
-              >
-                <div className="relative aspect-video rounded-apple overflow-hidden mb-6 shadow-xl shadow-black/5">
-                  <img src={sermon.thumbnail} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-80" alt={sermon.title} />
-                </div>
-                <h3 className="text-xl font-bold mb-3 group-hover:text-brand-blue transition-colors leading-tight">
-                  Walking in Purpose & Vision
-                </h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-400 text-sm font-medium">Pastor John Doe</span>
-                  <span className="text-gray-300 text-xs font-bold uppercase tracking-widest">Purpose Series</span>
                 </div>
               </motion.div>
             ))}

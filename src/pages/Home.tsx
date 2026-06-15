@@ -3,6 +3,7 @@ import { Play, ArrowRight, Calendar, MapPin, Clock, Quote, Heart } from 'lucide-
 import { motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { MOCK_SERMONS, MOCK_EVENTS, MOCK_TESTIMONIES, MOCK_MINISTRIES } from '../data/mockData';
+import { DailyGrace } from '../components/DailyGrace';
 
 const SectionHeader = ({ title, subtitle, centered = false }: { title: string; subtitle?: string; centered?: boolean }) => (
   <div className={`mb-16 ${centered ? 'text-center' : ''}`}>
@@ -31,25 +32,23 @@ export const Home = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold uppercase tracking-widest mb-6">
-              Welcome to WOGC Lekki
-            </span>
-            <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[1.1] tracking-tighter">
+
+            <h1 className="text-[2.5rem] lg:text-[4.5rem] font-bold mb-6 leading-[1.1] tracking-[-0.02em] text-white">
               Experience The <br />
               <span className="text-brand-blue">Wonders Of God</span>
             </h1>
-            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
+            <p className="text-[1rem] lg:text-[1.25rem] text-white/60 max-w-[540px] mx-auto mb-6 font-medium leading-[1.6]">
               A vibrant community where faith grows, lives are transformed, and God's power is experienced every day.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Link to="/visit" className="cta-button cta-primary w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
+              <Link to="/visit" className="cta-button cta-primary w-full sm:w-auto px-10">
                 Plan Your Visit
               </Link>
               <a 
                 href="https://www.youtube.com/@WOGCMedia" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="cta-button cta-secondary w-full sm:w-auto flex items-center justify-center gap-2 group"
+                className="cta-button cta-secondary w-full sm:w-auto flex items-center justify-center gap-2 group px-10"
               >
                 <div className="w-8 h-8 rounded-full bg-brand-blue flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Play size={14} fill="currentColor" />
@@ -57,6 +56,7 @@ export const Home = () => {
                 Watch Online
               </a>
             </div>
+
           </motion.div>
         </div>
 
@@ -121,6 +121,10 @@ export const Home = () => {
             ].map((service, i) => (
               <motion.div
                 key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
                 whileHover={{ y: -10 }}
                 className="apple-card p-10 flex flex-col items-center text-center"
               >
@@ -152,9 +156,16 @@ export const Home = () => {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {MOCK_SERMONS.map((sermon) => (
-              <motion.div key={sermon.id} className="group cursor-pointer">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {MOCK_SERMONS.map((sermon, i) => (
+              <motion.div 
+                key={sermon.id} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group cursor-pointer"
+              >
                 <div className="relative aspect-video rounded-apple overflow-hidden mb-6">
                   <img src={sermon.thumbnail} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={sermon.title} />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
@@ -174,23 +185,39 @@ export const Home = () => {
         </div>
       </section>
 
+      {/* SECTION: DAILY GRACE */}
+      <DailyGrace />
+
       {/* SECTION 5 — MINISTRIES */}
-      <section className="section-padding bg-brand-navy text-white">
+      <section id="ministries" className="section-padding bg-brand-navy text-white">
         <div className="max-w-7xl mx-auto">
-          <SectionHeader 
-            title="Life at WOGC" 
-            subtitle="Find your community. There is a place for everyone here."
-          />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {MOCK_MINISTRIES.map((m) => (
-              <Link key={m.id} to={`/ministries/${m.slug}`} className="relative h-80 rounded-apple overflow-hidden group">
-                <img src={m.image} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90" alt={m.name} />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/10 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <h4 className="font-black text-2xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] uppercase tracking-tight">{m.name}</h4>
-                  <div className="w-10 h-1.5 bg-brand-gold mt-3 group-hover:w-full transition-all duration-500 shadow-lg" />
-                </div>
-              </Link>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <SectionHeader 
+              title="Life at WOGC" 
+              subtitle="Find your community. There is a place for everyone here."
+            />
+            <Link to="/ministries" className="cta-button border-2 border-white/20 hover:bg-white/10 text-white font-bold text-sm mb-16 px-10">
+              View All Ministries
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+            {MOCK_MINISTRIES.map((m, i) => (
+              <motion.div
+                key={m.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <Link to={`/ministries#${m.slug}`} className="relative h-80 rounded-apple overflow-hidden group block">
+                  <img src={m.image} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90" alt={m.name} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/10 to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <h4 className="font-extrabold text-lg md:text-xl text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-tight">{m.name}</h4>
+                    <div className="w-10 h-1.5 bg-brand-gold mt-3 group-hover:w-full transition-all duration-500 shadow-lg" />
+                  </div>
+                </Link>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -201,8 +228,15 @@ export const Home = () => {
         <div className="max-w-7xl mx-auto">
           <SectionHeader title="What's Happening" subtitle="Don't miss out on these powerful times of fellowship." centered />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {MOCK_EVENTS.map((event) => (
-              <div key={event.id} className="apple-card p-1 items-start flex flex-col md:flex-row gap-8 overflow-hidden hover:scale-[1.01]">
+            {MOCK_EVENTS.map((event, i) => (
+              <motion.div 
+                key={event.id}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="apple-card p-1 items-start flex flex-col md:flex-row gap-8 overflow-hidden hover:scale-[1.01]"
+              >
                 <div className="w-full md:w-56 h-64 md:h-auto shrink-0 relative overflow-hidden">
                   <img src={event.image} className="w-full h-full object-cover" alt={event.title} />
                   <div className="absolute top-4 left-4 bg-white px-3 py-2 rounded-xl text-center shadow-lg">
@@ -225,7 +259,7 @@ export const Home = () => {
                   </div>
                   <button className="cta-button cta-primary py-3 text-sm px-6">Register Now</button>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -233,28 +267,34 @@ export const Home = () => {
 
       {/* SECTION 7 — TESTIMONIES */}
       <section className="section-padding bg-brand-bg">
-        <div className="max-w-4xl mx-auto text-center">
-          <SectionHeader title="Changed Lives" centered />
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="apple-card p-12 md:p-20 relative"
-          >
-            <Quote className="absolute top-10 left-10 text-brand-blue opacity-10" size={80} />
-            <div className="relative z-10">
-              <p className="text-2xl md:text-3xl font-medium text-gray-800 leading-relaxed mb-12 italic">
-                "{MOCK_TESTIMONIES[0].story}"
-              </p>
-              <div className="flex items-center justify-center gap-4">
-                <img src={MOCK_TESTIMONIES[0].photo} className="w-16 h-16 rounded-full object-cover ring-4 ring-white" alt={MOCK_TESTIMONIES[0].name} />
-                <div className="text-left">
-                  <h5 className="font-bold text-lg">{MOCK_TESTIMONIES[0].name}</h5>
-                  <span className="text-sm text-gray-500 font-medium">{MOCK_TESTIMONIES[0].date}</span>
+        <div className="max-w-7xl mx-auto">
+          <SectionHeader title="Changed Lives" subtitle="Real stories of God's power and transformation in our community." centered />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {MOCK_TESTIMONIES.map((testimony, i) => (
+              <motion.div
+                key={testimony.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="apple-card p-10 relative flex flex-col h-full"
+              >
+                <Quote className="absolute top-6 left-6 text-brand-blue opacity-10" size={40} />
+                <div className="relative z-10 flex flex-col h-full">
+                  <p className="text-lg font-medium text-gray-800 leading-relaxed mb-8 italic flex-grow">
+                    "{testimony.story}"
+                  </p>
+                  <div className="flex items-center gap-4 mt-auto pt-6 border-t border-gray-100">
+                    <img src={testimony.photo} className="w-12 h-12 rounded-full object-cover ring-2 ring-white" alt={testimony.name} />
+                    <div className="text-left">
+                      <h5 className="font-bold text-base text-brand-navy">{testimony.name}</h5>
+                      <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{testimony.date}</span>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </motion.div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -262,7 +302,13 @@ export const Home = () => {
       <section className="section-padding bg-brand-navy relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-blue/20 blur-[150px] -translate-y-1/2 translate-x-1/2 rounded-full" />
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="max-w-2xl">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="max-w-2xl"
+          >
             <h2 className="text-4xl md:text-6xl font-black text-white mb-6 leading-tight">Partner With What <br />God Is Doing</h2>
             <p className="text-xl text-white/70 mb-10 leading-relaxed">
               Your generosity helps us reach lives, serve communities, and spread the Gospel. Together, we see the miraculous.
@@ -275,7 +321,7 @@ export const Home = () => {
                 Partner with Projects
               </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

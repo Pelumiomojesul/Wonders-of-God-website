@@ -49,11 +49,11 @@ export const Footer = () => {
           <div>
             <h4 className="font-display font-bold text-lg mb-6">Ministries</h4>
             <ul className="flex flex-col gap-4 text-white/60 text-sm">
-              <li><Link to="/ministries/youth" className="hover:text-white transition-colors">Youth Ministry</Link></li>
-              <li><Link to="/ministries/children" className="hover:text-white transition-colors">Children's Church</Link></li>
-              <li><Link to="/ministries/men" className="hover:text-white transition-colors">Men of Valor</Link></li>
-              <li><Link to="/ministries/women" className="hover:text-white transition-colors">Virtuous Women</Link></li>
-              <li><Link to="/ministries/prayer" className="hover:text-white transition-colors">House of Prayer</Link></li>
+              <li><Link to="/ministries#youth-ministry" className="hover:text-white transition-colors">Youth Ministry</Link></li>
+              <li><Link to="/ministries#childrens-church" className="hover:text-white transition-colors">Children's Church</Link></li>
+              <li><Link to="/ministries#men-of-valor" className="hover:text-white transition-colors">Men of Valor</Link></li>
+              <li><Link to="/ministries#virtuous-women" className="hover:text-white transition-colors">Virtuous Women</Link></li>
+              <li><Link to="/ministries#house-of-prayer" className="hover:text-white transition-colors">House of Prayer</Link></li>
             </ul>
           </div>
 

@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, ArrowRight, Github } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export const Login = () => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      login(email);
+      navigate('/dashboard');
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-white">
       {/* Left Side - Image */}
@@ -13,7 +26,7 @@ export const Login = () => {
         className="hidden md:block md:w-1/2 lg:w-3/5 relative overflow-hidden"
       >
         <img 
-          src="https://images.unsplash.com/photo-1510076857177-7470076d4098?auto=format&fit=crop&q=80&w=2000" 
+          src="https://images.unsplash.com/photo-1544427920-c49ccfb85579?auto=format&fit=crop&q=80&w=2000" 
           alt="Church Worship"
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -46,14 +59,17 @@ export const Login = () => {
             <p className="text-gray-500 font-medium">Please enter your details to sign in.</p>
           </div>
 
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-2">
               <label className="text-xs font-bold uppercase text-gray-400 tracking-widest">Email Address</label>
               <div className="relative">
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                 <input 
                   type="email" 
-                  className="w-full bg-brand-bg border border-gray-100 rounded-xl py-4 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full bg-brand-bg border border-gray-100 rounded-xl py-5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all font-medium" 
                   placeholder="name@example.com"
                 />
               </div>
@@ -68,7 +84,8 @@ export const Login = () => {
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
                 <input 
                   type="password" 
-                  className="w-full bg-brand-bg border border-gray-100 rounded-xl py-4 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all" 
+                  required
+                  className="w-full bg-brand-bg border border-gray-100 rounded-xl py-5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-brand-blue transition-all font-medium" 
                   placeholder="••••••••"
                 />
               </div>
@@ -79,10 +96,36 @@ export const Login = () => {
               <label htmlFor="remember" className="text-sm font-medium text-gray-600">Remember for 30 days</label>
             </div>
 
-            <button className="cta-button cta-primary w-full flex items-center justify-center gap-2 py-4">
+            <button type="submit" className="cta-button cta-primary w-full flex items-center justify-center gap-2 py-5 text-lg">
               Sign In <ArrowRight size={18} />
             </button>
           </form>
+
+          {/* Test Account Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mt-8 p-6 bg-brand-gold/5 rounded-2xl border border-brand-gold/20"
+          >
+            <p className="text-xs font-black uppercase text-brand-gold tracking-widest mb-3">Testing Access</p>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-bold text-brand-navy">member@wogc.org</p>
+                <p className="text-xs text-gray-500">password: 123456</p>
+              </div>
+              <button 
+                onClick={() => {
+                  setEmail('member@wogc.org');
+                  login('member@wogc.org');
+                  navigate('/dashboard');
+                }}
+                className="px-4 py-2 bg-brand-gold text-brand-navy text-xs font-bold rounded-lg hover:scale-105 active:scale-95 transition-all shadow-lg shadow-brand-gold/20"
+              >
+                Quick Login
+              </button>
+            </div>
+          </motion.div>
 
           <div className="relative my-10">
             <div className="absolute inset-0 flex items-center">

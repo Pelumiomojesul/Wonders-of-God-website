@@ -67,12 +67,12 @@ export const Give = () => {
             <motion.div 
                key={i}
                whileHover={{ y: -10 }}
-               className={`apple-card p-12 text-center flex flex-col items-center ${method.primary ? 'bg-brand-blue text-white shadow-2xl shadow-blue-500/20' : 'bg-white'}`}
+               className={`apple-card p-12 text-center flex flex-col items-center border-0 shadow-lg ${method.primary ? 'bg-brand-blue text-white shadow-2xl shadow-blue-500/20' : 'bg-white text-brand-navy'}`}
             >
               <div className={`w-20 h-20 rounded-3xl flex items-center justify-center mb-8 ${method.primary ? 'bg-white/20' : 'bg-brand-blue/10 text-brand-blue'}`}>
                  <method.icon size={40} />
               </div>
-              <h3 className="text-2xl font-black mb-4">{method.title}</h3>
+              <h3 className={`text-2xl font-black mb-4 ${method.primary ? 'text-white' : 'text-brand-navy'}`}>{method.title}</h3>
               <p className={`text-sm mb-10 font-medium ${method.primary ? 'text-white/80' : 'text-gray-500'}`}>
                 {method.desc}
               </p>

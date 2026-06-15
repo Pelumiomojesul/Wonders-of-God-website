@@ -23,26 +23,28 @@
   }
 }
 
-.glass-nav {
-  @apply bg-white/70 backdrop-blur-md border-b border-white/20;
-}
+@layer components {
+  .glass-nav {
+    @apply bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-sm transition-all duration-300;
+  }
 
-.apple-card {
-  @apply bg-[rgba(255,255,255,0.03)] rounded-apple shadow-sm hover:shadow-xl transition-all duration-500 border border-[rgba(212,175,55,0.15)];
-}
+  .apple-card {
+    @apply bg-white rounded-apple shadow-sm hover:shadow-xl transition-all duration-500 border border-[rgba(212,175,55,0.15)];
+  }
 
-.cta-button {
-  @apply px-8 py-4 rounded-full font-medium transition-all duration-300;
-}
+  .cta-button {
+    @apply px-8 py-4 rounded-full font-medium transition-all duration-300;
+  }
 
-.cta-primary {
-  @apply bg-brand-blue text-white hover:bg-blue-700 hover:scale-[1.02] active:scale-[0.98];
-}
+  .cta-primary {
+    @apply bg-brand-blue text-white hover:bg-blue-700 hover:scale-[1.02] active:scale-[0.98];
+  }
 
-.cta-secondary {
-  @apply bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98];
-}
+  .cta-secondary {
+    @apply bg-white/10 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 hover:scale-[1.02] active:scale-[0.98];
+  }
 
-.section-padding {
-  @apply py-20 lg:py-32 px-6;
+  .section-padding {
+    @apply py-20 lg:py-32 px-6;
+  }
 }

@@ -47,3 +47,11 @@ export interface Leadership {
     instagram?: string;
   };
 }
+
+export interface Devotional {
+  id: string;
+  scripture: string;
+  reference: string;
+  thought: string;
+  date: string;
+}

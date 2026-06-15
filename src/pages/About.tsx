@@ -100,9 +100,9 @@ export const About = () => {
           <h2 className="text-4xl md:text-5xl font-black mb-16 text-center">Our Leadership</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { name: 'Pastor John Doe', role: 'Senior Pastor', photo: 'https://images.unsplash.com/photo-1542103749-8ef59b94f42e?auto=format&fit=crop&q=80&w=800' },
-              { name: 'Pastor Jane Doe', role: 'Executive Pastor', photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800' },
-              { name: 'Pastor Mike Smith', role: 'Youth Pastor', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800' },
+              { name: 'Rev. J.U Aire', role: 'General Overseer', photo: 'https://images.unsplash.com/photo-1542103749-8ef59b94f42e?auto=format&fit=crop&q=80&w=800' },
+              { name: 'Pastor/Mrs Fidelia Aire', role: 'Executive Pastor', photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=800' },
+              { name: 'Pastor Osahon Aire', role: 'Resident Pastor', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=800' },
             ].map((leader, i) => (
               <motion.div 
                 key={i}
